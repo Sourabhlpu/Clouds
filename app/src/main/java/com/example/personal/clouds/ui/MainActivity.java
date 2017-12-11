@@ -38,7 +38,10 @@ public class MainActivity extends AppCompatActivity {
         Retrofit retrofit = builder.build();
         WeatherClient client = retrofit.create(WeatherClient.class);
         Call<Weather> call = client.forecastForDays("201301" + ",in"
-                ,getString(R.string.api_key));
+                ,getString(R.string.api_key)
+                ,getString(R.string.days_forecast)
+                ,getString(R.string.response_mode)
+                ,getString(R.string.units));
 
         call.enqueue(new Callback<Weather>() {
             @Override

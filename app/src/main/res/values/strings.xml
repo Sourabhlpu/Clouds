@@ -6,4 +6,13 @@
 
     <!-- the api key for the openweathermap.org !-->
     <string name="api_key">d2daab429e7e501941a7bdb57178c8bd</string>
+
+    <!-- the number of days forecast we want to get from the server !-->
+    <string name="days_forecast">7</string>
+
+    <!-- the mode of data we want JSON/XML this should always be json !-->
+    <string name="response_mode">json</string>
+
+    <!-- the preffered unit of measurement !-->
+    <string name="units">metric</string>
 </resources>

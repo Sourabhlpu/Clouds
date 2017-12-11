@@ -12,9 +12,12 @@ import retrofit2.http.Query;
 
 public interface WeatherClient {
 
-    @GET("data/2.5/forecast")
+    @GET("data/2.5/forecast/daily")
     Call<Weather> forecastForDays(
             @Query("zip") String zipCode,
-            @Query("appid") String apiKey
+            @Query("appid") String apiKey,
+            @Query("cnt") String count,
+            @Query("mode") String mode,
+            @Query("units") String unit
     );
 }
