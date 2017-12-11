@@ -1,103 +1,143 @@
 package com.example.personal.clouds.model.pojo;
 
+import java.util.List;
+
 /**
  * Created by personal on 12/10/2017.
  */
 
 public class Weather {
 
-    private long mDate;
-    private int mWeatherId;
-    private double mMinTemp;
-    private double mMaxTemp;
-    private float mHumidity;
-    private int mPressure;
-    private float mWindSpeed;
-    private int mDegrees;
+    public Weather() {
 
-    public long getmDate()
-    {
-        return mDate;
-    }
-    public void setmDate(long date)
-    {
-        mDate = date;
     }
 
-    public int getmWeatherId()
-    {
-        return mWeatherId;
+    private City city;
+    private List<Forecast> list;
+
+
+    public class City {
+        private String id;
+        private String name;
+        private Coordinates coord;
+        private String country;
+
+        public String getId()
+        {
+            return id;
+        }
+
+        public String getName()
+        {
+            return name;
+        }
+        public Coordinates getCoord()
+        {
+            return coord;
+        }
+        public String getCountry()
+        {
+            return country;
+        }
+
     }
 
-    public void setmWeatherId(int weatherId)
-    {
-        mWeatherId = weatherId;
+    public class Coordinates {
+        private double lon;
+        private double lat;
+
+        public double getLon()
+        {
+            return lon;
+        }
+        public double getLat()
+        {
+            return lat;
+        }
     }
 
-    public double getmMinTemp()
-    {
-        return mMinTemp;
+    public class Forecast {
+        private long dt;
+        private Main main;
+        private Wind wind;
+        private List<WeatherList> weather;
+
+        public long getDt()
+        {
+            return dt;
+        }
+        public Main getMain()
+        {
+            return main;
+        }
+        public Wind getWind()
+        {
+            return wind;
+        }
+        public List<WeatherList> getWeatherList()
+        {
+            return weather;
+        }
+
     }
 
-    public void setmMinTemp(double minTemp)
-    {
-        mMinTemp = minTemp;
+    public class Main {
+        private double temp_min;
+        private double temp_max;
+        private double pressure;
+        private int humidity;
+
+        public double getTemp_min()
+        {
+            return temp_min;
+        }
+
+        public double getTemp_max()
+        {
+            return temp_max;
+        }
+        public double getPressure()
+        {
+            return pressure;
+        }
+        public int getHumidity()
+        {
+            return humidity;
+        }
     }
 
-    public double getmMaxTemp()
-    {
-        return mMaxTemp;
+    public class Wind {
+       private double speed;
+       private double deg;
+
+       public double getSpeed()
+       {
+           return getSpeed();
+       }
+       public double getDeg()
+       {
+           return deg;
+       }
+
     }
 
-    public void setmMaxTemp(double maxTemp)
-    {
-        mMaxTemp = maxTemp;
+    public class WeatherList {
+        private int id;
+
+        public int getId()
+        {
+            return id;
+        }
     }
 
-    public float getmHumidity()
+    public List<Forecast> getList()
     {
-        return mHumidity;
+        return list;
     }
 
-    public void setmHumidity(float humidity)
+    public City getCity()
     {
-        mHumidity = humidity;
+        return city;
     }
-
-    public int getmPressure()
-    {
-        return mPressure;
-    }
-
-    public void setmPressure(int pressure)
-    {
-        mPressure = pressure;
-    }
-
-    public Float getmWindSpeed()
-    {
-        return mWindSpeed;
-    }
-
-    public void setmWindSpeed(int windSpeed)
-    {
-        mWindSpeed = windSpeed;
-    }
-
-    public int getmDegrees()
-    {
-        return mDegrees;
-    }
-
-    public void setmDegrees(int degrees)
-    {
-        mDegrees = degrees;
-    }
-
-
-
-
-
-
 
 }

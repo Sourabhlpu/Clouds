@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Clouds</string>
+
+    <!-- base url string  !-->
+    <string name="base_url">https://api.openweathermap.org/</string>
+
+    <!-- the api key for the openweathermap.org !-->
+    <string name="api_key">d2daab429e7e501941a7bdb57178c8bd</string>
 </resources>

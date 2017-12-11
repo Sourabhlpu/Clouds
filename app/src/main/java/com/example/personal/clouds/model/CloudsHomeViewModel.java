@@ -12,9 +12,9 @@ import com.example.personal.clouds.model.pojo.Weather;
 public class CloudsHomeViewModel extends ViewModel {
 
 
-    private LiveData<Weather> weather;
+    private LiveData<Weather.Forecast> weather;
 
-    public LiveData<Weather> getWeather()
+    public LiveData<Weather.Forecast> getWeather()
     {
         return weather;
     }
