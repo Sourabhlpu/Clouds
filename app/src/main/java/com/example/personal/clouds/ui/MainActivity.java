@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
        viewModel = ViewModelProviders.of(this).get(CloudsHomeViewModel.class);
+       viewModel.init();
        viewModel.getWeather().observe(this, weather -> {
 
         });

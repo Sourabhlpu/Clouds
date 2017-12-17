@@ -1,6 +1,7 @@
 package com.example.personal.clouds.di.modules;
 
 import com.example.personal.clouds.utilities.network.WeatherClient;
+import com.example.personal.clouds.utilities.network.WeatherRepository;
 
 import javax.inject.Singleton;
 
@@ -39,5 +40,12 @@ public class NetModule {
     WeatherClient provideWeatherClient(Retrofit retrofit)
     {
         return retrofit.create(WeatherClient.class);
+    }
+
+    @Provides
+    @Singleton
+    WeatherRepository getWeatherRepository()
+    {
+        return new WeatherRepository();
     }
 }
