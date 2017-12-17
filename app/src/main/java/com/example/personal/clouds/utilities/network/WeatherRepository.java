@@ -4,15 +4,16 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 
 import com.example.personal.clouds.R;
+import com.example.personal.clouds.di.components.Clouds;
 import com.example.personal.clouds.model.pojo.Weather;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by personal on 12/11/2017.
@@ -20,17 +21,17 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class WeatherRepository {
 
-    private WeatherClient weatherClient;
+    @Inject  private WeatherClient client;
+    
+
+
 
     public LiveData<Weather.Forecast> getWeatherForecast()
     {
-        final MutableLiveData<Weather.Forecast> data = new MutableLiveData<>();
-        Retrofit.Builder builder = new Retrofit.Builder()
-                .baseUrl(String.valueOf(R.string.base_url))
-                .addConverterFactory(GsonConverterFactory.create());
+        Clouds.getNetComponent().inject(this);
 
-        Retrofit retrofit = builder.build();
-        WeatherClient client = retrofit.create(WeatherClient.class);
+        final MutableLiveData<Weather.Forecast> data = new MutableLiveData<>();
+
         Call<Weather> call = client.forecastForDays("201301" + ",in"
                 ,String.valueOf(R.string.api_key)
                 ,String.valueOf(R.string.days_forecast)
