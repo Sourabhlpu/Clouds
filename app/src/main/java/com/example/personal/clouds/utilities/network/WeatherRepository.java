@@ -21,7 +21,7 @@ import retrofit2.Response;
 
 public class WeatherRepository {
 
-    @Inject  private WeatherClient client;
+    @Inject WeatherClient client;
 
     public LiveData<Weather.Forecast> getWeatherForecast()
     {
