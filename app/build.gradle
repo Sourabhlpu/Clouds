@@ -44,5 +44,10 @@ dependencies {
     annotationProcessor 'com.google.dagger:dagger-android-processor:2.11'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.11'
 
+    //dependency for room
+    compile 'android.arch.persistence.room:runtime:1.0.0'
+    annotationProcessor "android.arch.persistence.room:compiler:1.0.0"
+
+
     testCompile 'junit:junit:4.12'
 }
