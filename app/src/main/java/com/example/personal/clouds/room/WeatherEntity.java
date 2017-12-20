@@ -1,19 +1,23 @@
 package com.example.personal.clouds.room;
 
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
+
+import java.util.Date;
 
 /**
  * Created by personal on 12/18/2017.
  */
 
-@Entity
+@Entity(tableName = "weather", indices = {@Index(value = {"date"}, unique = true)})
 public class WeatherEntity {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private int id;
 
-   private long  mDate;
+
+   private Date mDate;
 
    private int mWeatherId;
 
@@ -21,93 +25,88 @@ public class WeatherEntity {
 
    private double mMax;
 
-   private float mHumidity;
+   private double mHumidity;
 
-   private float mWindSpeed;
+   private double mWindSpeed;
 
-   private float mWindDirection;
+   private double mWindDirection;
 
-   private float mPressure;
+   private double mPressure;
 
-   public long getDate()
+
+   public WeatherEntity(int id, int weatherId, Date date, double min, double max, double humidity, double pressure, double wind, double degrees)
+   {
+       this.id = id;
+       mWeatherId = weatherId;
+       mDate = date;
+       mMin = min;
+       mMax = max;
+       mHumidity = humidity;
+       mWindSpeed = wind;
+       mWindDirection = degrees;
+       mPressure = pressure;
+
+   }
+
+   public int getId()
+   {
+       return id;
+   }
+
+   public Date getDate()
    {
        return mDate;
    }
 
-   public void setDate(long date)
-   {
-       mDate = date;
-   }
+
 
    public int getWeatherId()
    {
        return mWeatherId;
    }
 
-   public void setWeatherId(int weatherId)
-   {
-       mWeatherId = weatherId;
-   }
+
 
    public double getMin()
    {
        return mMin;
    }
 
-   public void setmMin(double min)
-   {
-       mMin = min;
-   }
+
 
     public double getMax()
     {
         return mMax;
     }
 
-    public void setmMax(double max)
-    {
-        mMax = max;
-    }
 
-    public float getHumidity()
+
+    public double getHumidity()
     {
         return mHumidity;
     }
 
-    public void setHumidity(float humidity)
-    {
-        mHumidity = humidity;
-    }
 
-    public float getWindSpeed()
+
+    public double getWindSpeed()
     {
         return  mWindSpeed;
     }
 
-    public void setWindSpeed(float windSpeed)
-    {
-        mWindSpeed = windSpeed;
-    }
 
-    public float getWindDirection()
+
+    public double getWindDirection()
     {
         return mWindDirection;
     }
 
-    public void setmWindDirection(float windDirection)
-    {
-        mWindDirection = windDirection;
-    }
 
-    public float getmPressure()
+    public double getmPressure()
     {
         return mPressure;
     }
 
-    public void setmPressure(float pressure)
-    {
-        mPressure = pressure;
-    }
+
 
 
 
