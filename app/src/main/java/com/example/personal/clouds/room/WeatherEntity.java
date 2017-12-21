@@ -10,7 +10,7 @@ import java.util.Date;
  * Created by personal on 12/18/2017.
  */
 
-@Entity(tableName = "weather", indices = {@Index(value = {"date"}, unique = true)})
+@Entity(tableName = "weather", indices = {@Index(value = {"mDate"}, unique = true)})
 public class WeatherEntity {
 
     @PrimaryKey(autoGenerate = true)
