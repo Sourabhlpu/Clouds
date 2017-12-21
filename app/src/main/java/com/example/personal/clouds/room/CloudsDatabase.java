@@ -3,6 +3,7 @@ package com.example.personal.clouds.room;
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
+import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
 import android.util.Log;
 
@@ -11,6 +12,7 @@ import android.util.Log;
  */
 
 @Database(entities = {WeatherEntity.class}, version = 1)
+@TypeConverters(DateConverter.class)
 public abstract class CloudsDatabase extends RoomDatabase {
 
     private static final String LOG_TAG = CloudsDatabase.class.getSimpleName();
