@@ -7,6 +7,7 @@ import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by personal on 12/18/2017.
@@ -15,7 +16,7 @@ import java.util.Date;
 @Dao
 public interface WeatherDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void bulkInsert(WeatherEntity... weather);
+    void bulkInsert(List<WeatherEntity> weather);
 
     @Query("SELECT * FROM WeatherEntity")
     LiveData<WeatherEntity> loadAll();

@@ -48,6 +48,20 @@ public class WeatherEntity {
 
    }
 
+    public WeatherEntity(int weatherId, Date date, double min, double max, double humidity, double pressure, double wind, double degrees)
+    {
+
+        mWeatherId = weatherId;
+        mDate = date;
+        mMin = min;
+        mMax = max;
+        mHumidity = humidity;
+        mWindSpeed = wind;
+        mWindDirection = degrees;
+        mPressure = pressure;
+
+    }
+
    public int getId()
    {
        return id;

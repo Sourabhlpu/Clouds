@@ -6,11 +6,12 @@ import android.util.Log;
 
 import com.example.personal.clouds.AppExecutors;
 import com.example.personal.clouds.R;
+import com.example.personal.clouds.data.database.WeatherDao;
+import com.example.personal.clouds.data.database.WeatherEntity;
 import com.example.personal.clouds.data.network.WeatherClient;
 import com.example.personal.clouds.data.network.WeatherNetworkDataSource;
 import com.example.personal.clouds.di.components.Clouds;
 import com.example.personal.clouds.model.pojo.Weather;
-import com.example.personal.clouds.data.database.WeatherDao;
 
 import java.util.List;
 
@@ -46,16 +47,19 @@ public class WeatherRepository {
         mWeatherNetworkDataSource = weatherNetworkDataSource;
         mExecutors = executors;
 
-        /*
-        LiveData<WeatherEntity[]> networkData = mWeatherNetworkDataSource.getCurrentWeatherForecasts();
-        networkData.observeForever(newForecastFromNetwork -> {
-        mExecutors.diskIO().execute(() -> {
 
-        mWeatherDao.bulkInsert(newForecastNetwork);
-        Log.d(LOG_TAG, "New values inserted");
+        LiveData<List<WeatherEntity>> networkData = mWeatherNetworkDataSource.getCurrentWeatherForecast();
+        networkData.observeForever(newForecastsFromNetwork -> {
+            mExecutors.diskIO().execute(() -> {
+                // Deletes old historical data
+                deleteOldData();
+                Log.d(LOG_TAG, "Old weather deleted");
+                // Insert our new weather data into Sunshine's database
+                mWeatherDao.bulkInsert(newForecastsFromNetwork);
+                Log.d(LOG_TAG, "New values inserted");
+            });
         });
 
-         */
     }
 
     public synchronized static WeatherRepository getInstance(WeatherDao weatherDao,
