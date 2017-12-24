@@ -1,9 +1,9 @@
-package com.example.personal.clouds.model;
+package com.example.personal.clouds.ui.detail;
 
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 
-import com.example.personal.clouds.room.WeatherEntity;
+import com.example.personal.clouds.data.database.WeatherEntity;
 
 /**
  * Created by personal on 12/21/2017.

@@ -1,4 +1,4 @@
-package com.example.personal.clouds.utilities.network;
+package com.example.personal.clouds.data.network;
 
 import com.example.personal.clouds.model.pojo.Weather;
 

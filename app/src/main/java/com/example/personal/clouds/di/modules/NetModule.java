@@ -1,7 +1,7 @@
 package com.example.personal.clouds.di.modules;
 
-import com.example.personal.clouds.utilities.network.WeatherClient;
-import com.example.personal.clouds.utilities.network.WeatherRepository;
+import com.example.personal.clouds.data.network.WeatherClient;
+import com.example.personal.clouds.data.WeatherRepository;
 
 import javax.inject.Singleton;
 

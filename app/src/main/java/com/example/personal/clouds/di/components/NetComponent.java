@@ -2,8 +2,8 @@ package com.example.personal.clouds.di.components;
 
 import com.example.personal.clouds.di.modules.AppModule;
 import com.example.personal.clouds.di.modules.NetModule;
-import com.example.personal.clouds.model.CloudsHomeViewModel;
-import com.example.personal.clouds.utilities.network.WeatherRepository;
+import com.example.personal.clouds.ui.list.CloudsHomeViewModel;
+import com.example.personal.clouds.data.WeatherRepository;
 
 import javax.inject.Singleton;
 

@@ -1,4 +1,4 @@
-package com.example.personal.clouds.ui;
+package com.example.personal.clouds.ui.list;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.example.personal.clouds.R;
-import com.example.personal.clouds.model.CloudsHomeViewModel;
 
 public class MainActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.example.personal.clouds.room;
+package com.example.personal.clouds.data.database;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;

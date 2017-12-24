@@ -1,11 +1,11 @@
-package com.example.personal.clouds.model;
+package com.example.personal.clouds.ui.list;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
 
 import com.example.personal.clouds.di.components.Clouds;
 import com.example.personal.clouds.model.pojo.Weather;
-import com.example.personal.clouds.utilities.network.WeatherRepository;
+import com.example.personal.clouds.data.WeatherRepository;
 
 import javax.inject.Inject;
 

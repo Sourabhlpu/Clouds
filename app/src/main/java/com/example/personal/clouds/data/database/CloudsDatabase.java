@@ -1,4 +1,4 @@
-package com.example.personal.clouds.room;
+package com.example.personal.clouds.data.database;
 
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;

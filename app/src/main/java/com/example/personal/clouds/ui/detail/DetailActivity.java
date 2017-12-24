@@ -1,11 +1,10 @@
-package com.example.personal.clouds.ui;
+package com.example.personal.clouds.ui.detail;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.personal.clouds.R;
-import com.example.personal.clouds.model.DetailActivityViewModel;
 
 public class DetailActivity extends AppCompatActivity {
 
