@@ -1,7 +1,18 @@
 package com.example.personal.clouds.di.modules;
 
-import com.example.personal.clouds.data.network.WeatherClient;
+import android.app.Application;
+import android.arch.persistence.room.Room;
+import android.os.Handler;
+import android.os.Looper;
+
+import com.example.personal.clouds.AppExecutors;
 import com.example.personal.clouds.data.WeatherRepository;
+import com.example.personal.clouds.data.database.CloudsDatabase;
+import com.example.personal.clouds.data.database.WeatherDao;
+import com.example.personal.clouds.data.network.WeatherClient;
+import com.example.personal.clouds.data.network.WeatherNetworkDataSource;
+
+import java.util.concurrent.Executors;
 
 import javax.inject.Singleton;
 
@@ -42,10 +53,55 @@ public class NetModule {
         return retrofit.create(WeatherClient.class);
     }
 
+    @Singleton
+    @Provides
+    Handler providesHandler()
+    {
+        return new Handler(Looper.getMainLooper());
+    }
+
+    @Singleton
+    @Provides
+    AppExecutors.MainThreadExecutor getMainThreadExecutor()
+    {
+        return new AppExecutors.MainThreadExecutor();
+    }
+
+    @Singleton
+    @Provides
+    AppExecutors getAppExecutors(AppExecutors.MainThreadExecutor mainThreadExecutor)
+    {
+        return new AppExecutors(Executors.newSingleThreadExecutor(),
+                Executors.newFixedThreadPool(3)
+                ,mainThreadExecutor);
+    }
+
+    @Singleton
+    @Provides
+    WeatherNetworkDataSource getNetworkDataSource()
+    {
+        return new WeatherNetworkDataSource();
+    }
+
+    @Singleton
+    @Provides
+    CloudsDatabase getDatatbase(Application context)
+    {
+        return Room.databaseBuilder(context,CloudsDatabase.class,CloudsDatabase.DATABASE_NAME).build();
+    }
+
+    @Singleton
+    @Provides
+    WeatherDao getWeatherDao(CloudsDatabase database)
+    {
+        return database.weatherDao();
+    }
+
     @Provides
     @Singleton
     WeatherRepository getWeatherRepository()
     {
         return new WeatherRepository();
     }
+
 }

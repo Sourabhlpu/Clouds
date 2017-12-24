@@ -16,7 +16,7 @@ import android.util.Log;
 public abstract class CloudsDatabase extends RoomDatabase {
 
     private static final String LOG_TAG = CloudsDatabase.class.getSimpleName();
-    private static final String DATABASE_NAME = "weather";
+    public static final String DATABASE_NAME = "weather";
 
     //for getting a singleton
     private static final Object LOCK = new Object();

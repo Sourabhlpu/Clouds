@@ -13,14 +13,14 @@ import java.util.concurrent.Executors;
 
 public class AppExecutors {
 
-    private static final Object lock = new Object();
-    private static AppExecutors sInstance;
-    private final Executor diskIO;
-    private final Executor mainThread;
-    private final Executor networkIO;
+    public static final Object lock = new Object();
+    public static AppExecutors sInstance;
+    public final Executor diskIO;
+    public final Executor mainThread;
+    public final Executor networkIO;
 
 
-    private AppExecutors(Executor diskIO, Executor networkIO, Executor mainThead)
+    public AppExecutors(Executor diskIO, Executor networkIO, Executor mainThead)
     {
         this.diskIO = diskIO;
         this.mainThread = mainThead;
@@ -55,9 +55,9 @@ public class AppExecutors {
         return networkIO;
     }
 
-    private static class MainThreadExecutor implements Executor {
+    public static class MainThreadExecutor implements Executor {
 
-        private Handler mainThreadHandler = new Handler(Looper.getMainLooper());
+        public Handler mainThreadHandler = new Handler(Looper.getMainLooper());
 
         @Override
         public void execute(@NonNull Runnable runnable) {

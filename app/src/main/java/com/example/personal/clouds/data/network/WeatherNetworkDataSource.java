@@ -1,11 +1,10 @@
 package com.example.personal.clouds.data.network;
 
+import android.app.Application;
 import android.arch.lifecycle.MutableLiveData;
-import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-import com.example.personal.clouds.AppExecutors;
 import com.example.personal.clouds.R;
 import com.example.personal.clouds.data.database.WeatherEntity;
 import com.example.personal.clouds.di.components.Clouds;
@@ -39,6 +38,8 @@ public class WeatherNetworkDataSource {
 
     @Inject
     WeatherClient client;
+    @Inject
+    Application mContext;
 
     // Interval at which to sync with the weather. Use TimeUnit for convenience, rather than
     // writing out a bunch of multiplication ourselves and risk making a silly mistake.
@@ -47,29 +48,19 @@ public class WeatherNetworkDataSource {
     private static final int SYNC_FLEXTIME_SECONDS = SYNC_INTERVAL_SECONDS / 3;
     private static final String SUNSHINE_SYNC_TAG = "sunshine-sync";
 
-    private static final Object LOCK = new Object();
-    private static WeatherNetworkDataSource sInstance;
-    private final Context mContext;
+
+
 
     private final MutableLiveData<List<WeatherEntity>> mDownloadedWeatherForecast;
 
 
-    public WeatherNetworkDataSource(Context context, AppExecutors executors)
+    public WeatherNetworkDataSource()
     {
-        mContext = context;
         mDownloadedWeatherForecast = new MutableLiveData<>();
+        Clouds.getNetComponent().inject(this);
     }
 
-    public static WeatherNetworkDataSource getInstance(Context context, AppExecutors executors) {
-        Log.d(LOG_TAG, "Getting the network data source");
-        if (sInstance == null) {
-            synchronized (LOCK) {
-                sInstance = new WeatherNetworkDataSource(context.getApplicationContext(), executors);
-                Log.d(LOG_TAG, "Made new network data source");
-            }
-        }
-        return sInstance;
-    }
+
 
     public MutableLiveData<List<WeatherEntity>> getCurrentWeatherForecast()
     {
@@ -78,7 +69,7 @@ public class WeatherNetworkDataSource {
 
     void fetchWeather()
     {
-        Clouds.getNetComponent().inject(this);
+
 
 
 
@@ -140,7 +131,7 @@ public class WeatherNetworkDataSource {
 
         Job syncCloudsJob = dispatcher.newJobBuilder()
                 .setService(CloudsFirebaseJobService.class)
-                .setTag("")
+                .setTag(SUNSHINE_SYNC_TAG)
                 .setConstraints(Constraint.ON_ANY_NETWORK)
                 .setLifetime(Lifetime.FOREVER)
                 .setRecurring(true)
