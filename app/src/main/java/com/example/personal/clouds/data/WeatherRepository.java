@@ -8,6 +8,7 @@ import com.example.personal.clouds.data.database.WeatherDao;
 import com.example.personal.clouds.data.database.WeatherEntity;
 import com.example.personal.clouds.data.network.WeatherNetworkDataSource;
 import com.example.personal.clouds.di.components.Clouds;
+import com.example.personal.clouds.utilities.CloudsDateUtils;
 
 import java.util.Date;
 import java.util.List;
@@ -57,17 +58,25 @@ public class WeatherRepository {
         if(mInitialized) return;
         mInitialized = true;
 
-        startFetchWeatherService();
+        mExecutors.diskIO.execute(() -> {
+            if(isFetchNeeded()) {
+                startFetchWeatherService();
+            }
+        });
     }
 
     private void deleteOldData()
     {
-
+       Date date = CloudsDateUtils.getNormalizedUtcDateForToday();
+       mWeatherDao.deleteOldWeather(date);
     }
 
     private boolean isFetchNeeded()
     {
-        return true;
+        Date date = CloudsDateUtils.getNormalizedUtcDateForToday();
+        int count = mWeatherDao.countAllFutureWeather(date);
+
+        return count < WeatherNetworkDataSource.NUM_DAYS;
     }
 
     private void startFetchWeatherService()

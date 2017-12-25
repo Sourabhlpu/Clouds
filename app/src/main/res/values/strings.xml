@@ -15,4 +15,7 @@
 
     <!-- the preffered unit of measurement !-->
     <string name="units">metric</string>
+
+    <string name="today">Today</string>
+    <string name="tomorrow">Tomorrow</string>
 </resources>

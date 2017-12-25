@@ -47,7 +47,7 @@ public class WeatherNetworkDataSource {
     private static final int SYNC_INTERVAL_SECONDS = (int) TimeUnit.HOURS.toSeconds(SYNC_INTERVAL_HOURS);
     private static final int SYNC_FLEXTIME_SECONDS = SYNC_INTERVAL_SECONDS / 3;
     private static final String SUNSHINE_SYNC_TAG = "sunshine-sync";
-
+    public static final int NUM_DAYS = 14;
 
 
 
