@@ -9,6 +9,7 @@ import com.example.personal.clouds.data.database.WeatherEntity;
 import com.example.personal.clouds.data.network.WeatherNetworkDataSource;
 import com.example.personal.clouds.di.components.Clouds;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -72,6 +73,12 @@ public class WeatherRepository {
     private void startFetchWeatherService()
     {
         mWeatherNetworkDataSource.startFetchWeatherService();
+    }
+
+    private LiveData<WeatherEntity> getWeatherByDate(Date date)
+    {
+        initializeData();
+        return mWeatherDao.getWeatherByDate(date);
     }
 
 

@@ -23,5 +23,5 @@ public interface WeatherDao {
 
     @Query("SELECT * FROM weather WHERE date = :date")
 
-    WeatherEntity getWeatherByDate(Date date);
+    LiveData<WeatherEntity> getWeatherByDate(Date date);
 }
