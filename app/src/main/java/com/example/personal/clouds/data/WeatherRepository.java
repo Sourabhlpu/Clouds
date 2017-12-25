@@ -75,7 +75,7 @@ public class WeatherRepository {
         mWeatherNetworkDataSource.startFetchWeatherService();
     }
 
-    private LiveData<WeatherEntity> getWeatherByDate(Date date)
+    public LiveData<WeatherEntity> getWeatherByDate(Date date)
     {
         initializeData();
         return mWeatherDao.getWeatherByDate(date);

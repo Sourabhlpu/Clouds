@@ -11,7 +11,10 @@ import com.example.personal.clouds.data.database.CloudsDatabase;
 import com.example.personal.clouds.data.database.WeatherDao;
 import com.example.personal.clouds.data.network.WeatherClient;
 import com.example.personal.clouds.data.network.WeatherNetworkDataSource;
+import com.example.personal.clouds.ui.detail.DetailActivityViewModelFactory;
+import com.example.personal.clouds.utilities.CloudsDateUtils;
 
+import java.util.Date;
 import java.util.concurrent.Executors;
 
 import javax.inject.Singleton;
@@ -102,6 +105,15 @@ public class NetModule {
     WeatherRepository getWeatherRepository()
     {
         return new WeatherRepository();
+    }
+
+    @Provides
+    @Singleton
+    DetailActivityViewModelFactory getDetailViewModelFactory()
+    {
+        Date date = CloudsDateUtils.getNormalizedUtcDateForToday();
+
+        return new DetailActivityViewModelFactory(date);
     }
 
 }

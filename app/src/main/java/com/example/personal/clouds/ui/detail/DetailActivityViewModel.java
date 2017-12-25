@@ -1,9 +1,15 @@
 package com.example.personal.clouds.ui.detail;
 
-import android.arch.lifecycle.MutableLiveData;
+import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
 
+import com.example.personal.clouds.data.WeatherRepository;
 import com.example.personal.clouds.data.database.WeatherEntity;
+import com.example.personal.clouds.di.components.Clouds;
+
+import java.util.Date;
+
+import javax.inject.Inject;
 
 /**
  * Created by personal on 12/21/2017.
@@ -11,22 +17,22 @@ import com.example.personal.clouds.data.database.WeatherEntity;
 
 public class DetailActivityViewModel extends ViewModel {
 
-    private MutableLiveData<WeatherEntity> mWeather;
+    @Inject
+    WeatherRepository repository;
 
-    public DetailActivityViewModel()
+    private LiveData<WeatherEntity> mWeather;
+    private Date mDate;
+
+    public DetailActivityViewModel(Date date)
     {
-        mWeather = new MutableLiveData<>();
+        Clouds.getNetComponent().inject(this);
+        mDate = date;
+        mWeather = repository.getWeatherByDate(mDate);
     }
 
-    public MutableLiveData<WeatherEntity>getWeather()
+    public LiveData<WeatherEntity>getWeather()
     {
         return mWeather;
     }
-
-    public void setWeather(WeatherEntity weather)
-    {
-        mWeather.postValue(weather);
-    }
-
 
 }
