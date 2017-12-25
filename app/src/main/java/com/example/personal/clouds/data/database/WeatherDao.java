@@ -18,7 +18,7 @@ public interface WeatherDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void bulkInsert(List<WeatherEntity> weather);
 
-    @Query("SELECT * FROM WeatherEntity")
+    @Query("SELECT * FROM weather")
     LiveData<WeatherEntity> loadAll();
 
     @Query("SELECT * FROM weather WHERE date = :date")

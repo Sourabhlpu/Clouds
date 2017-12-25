@@ -24,7 +24,7 @@ public class CloudsHomeViewModel extends ViewModel {
     {
 
         Clouds.getNetComponent().inject(this);
-        mWeather = mRepository.getWeatherForecast();
+        //mWeather = mRepository.getWeatherForecast();
     }
 
     public LiveData<Weather.Forecast> getWeather()

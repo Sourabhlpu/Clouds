@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
-import com.example.personal.clouds.utilities.InjectorUtils;
+import com.example.personal.clouds.di.components.Clouds;
+
+import javax.inject.Inject;
 
 /**
  * Created by personal on 12/24/2017.
@@ -14,6 +16,9 @@ import com.example.personal.clouds.utilities.InjectorUtils;
 public class CloudsSyncIntentService extends IntentService {
 
     private static final String LOG_TAG = CloudsSyncIntentService.class.getSimpleName();
+
+    @Inject
+    WeatherNetworkDataSource networkDataSource;
 
     public CloudsSyncIntentService()
     {
@@ -24,9 +29,7 @@ public class CloudsSyncIntentService extends IntentService {
 
         Log.d(LOG_TAG, "Intent service started");
 
-        WeatherNetworkDataSource networkDataSource = InjectorUtils
-                .providesNetworkDataSource(this.getApplicationContext());
-
+        Clouds.getNetComponent().inject(this);
         networkDataSource.fetchWeather();
 
     }

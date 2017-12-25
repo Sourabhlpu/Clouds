@@ -11,7 +11,7 @@ import android.util.Log;
  * Created by personal on 12/18/2017.
  */
 
-@Database(entities = {WeatherEntity.class}, version = 1)
+@Database(entities = {WeatherEntity.class}, version = 1, exportSchema = false)
 @TypeConverters(DateConverter.class)
 public abstract class CloudsDatabase extends RoomDatabase {
 

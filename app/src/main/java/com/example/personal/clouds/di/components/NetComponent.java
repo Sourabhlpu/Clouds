@@ -1,5 +1,6 @@
 package com.example.personal.clouds.di.components;
 
+import com.example.personal.clouds.data.network.CloudsSyncIntentService;
 import com.example.personal.clouds.data.network.WeatherNetworkDataSource;
 import com.example.personal.clouds.di.modules.AppModule;
 import com.example.personal.clouds.di.modules.NetModule;
@@ -23,6 +24,6 @@ public interface NetComponent {
     void inject (WeatherRepository repository);
     void inject (CloudsHomeViewModel viewModel);
     void inject (WeatherNetworkDataSource networkDataSource);
-
+    void inject (CloudsSyncIntentService syncIntentService);
 
 }
