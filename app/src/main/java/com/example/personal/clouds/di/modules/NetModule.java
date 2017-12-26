@@ -12,6 +12,7 @@ import com.example.personal.clouds.data.database.WeatherDao;
 import com.example.personal.clouds.data.network.WeatherClient;
 import com.example.personal.clouds.data.network.WeatherNetworkDataSource;
 import com.example.personal.clouds.ui.detail.DetailActivityViewModelFactory;
+import com.example.personal.clouds.ui.list.ListActivityViewModelFactory;
 import com.example.personal.clouds.utilities.CloudsDateUtils;
 
 import java.util.Date;
@@ -114,6 +115,14 @@ public class NetModule {
         Date date = CloudsDateUtils.getNormalizedUtcDateForToday();
 
         return new DetailActivityViewModelFactory(date);
+    }
+
+    @Provides
+    @Singleton
+    ListActivityViewModelFactory getListViewModelFactory()
+    {
+        Date date = CloudsDateUtils.getNormalizedUtcDateForToday();
+        return new ListActivityViewModelFactory(date);
     }
 
 }

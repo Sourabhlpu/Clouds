@@ -90,7 +90,10 @@ public class WeatherRepository {
         return mWeatherDao.getWeatherByDate(date);
     }
 
-
-
+    public LiveData<List<WeatherEntity>> getWeatherList(Date date)
+    {
+        initializeData();
+        return mWeatherDao.loadAll(date);
+    }
 
 }
