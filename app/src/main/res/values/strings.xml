@@ -1,4 +1,5 @@
 <resources xmlns:xliff="http://schemas.android.com/apk/res-auto">
+
     <string name="app_name">Clouds</string>
 
     <!-- base url string  !-->
@@ -115,8 +116,7 @@
     <string name="condition_961">Violent Storm</string>
     <string name="condition_962">Hurricane</string>
 
-    <string name="condition_unknown">Unknown (<xliff:g id="conditionId">%1$d</xliff:g>)</
-        string>
+    <string name="condition_unknown">Unknown (<xliff:g id="conditionId">%1$d</xliff:g>)</string>
 
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      - Used for Accessibility purposes (Accessibility == a11y)                            -
