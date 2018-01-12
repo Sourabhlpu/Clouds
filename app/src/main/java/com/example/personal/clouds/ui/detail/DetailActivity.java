@@ -25,9 +25,23 @@ public class DetailActivity extends AppCompatActivity {
 
         Clouds.getNetComponent().inject(this);
 
+
+        /**
+         *  here we get the view model associated with this activity.
+         *  Since ViewModelProviders only take the view models constructors with no arguments
+         *  we use view model factory.
+         *  This only returns a new view model instace when the actvity is destroyed.
+         */
+
+
        mViewModel = ViewModelProviders.of(this,factory).get(DetailActivityViewModel.class);
 
-       mViewModel.getWeather().observe(this, weatherEntity -> {
+        /**
+         * Here we are observing the weather data. Whenever the data is changed onChanged method will
+         * be called and the UI will be updated. This only happens when the UI is in active state.
+         */
+
+        mViewModel.getWeather().observe(this, weatherEntity -> {
 
            if(weatherEntity != null) bindWeatherToUI(weatherEntity);
        });

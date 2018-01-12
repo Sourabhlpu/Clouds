@@ -9,6 +9,11 @@ import android.util.Log;
 
 /**
  * Created by personal on 12/18/2017.
+ * This class defines the database and extends the RoomDatabase class.
+ * Declaring the database name.
+ * Also passing all the entities that are in this database. Here its only one.
+ * version defines the database version. Need to increment it if we modify the database in future.
+ *
  */
 
 @Database(entities = {WeatherEntity.class}, version = 1, exportSchema = false)
@@ -39,8 +44,6 @@ public abstract class CloudsDatabase extends RoomDatabase {
         return sInstance;
     }
 
-
-
-
+    //we have to define the an abstract method to return the Dao type.
     public abstract WeatherDao weatherDao();
 }

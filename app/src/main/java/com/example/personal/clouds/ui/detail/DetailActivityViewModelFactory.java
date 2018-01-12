@@ -8,6 +8,9 @@ import java.util.Date;
 
 /**
  * Created by personal on 12/25/2017.
+ * Since ViewModel Providers only accepts view model whose constructor is empty we use view model
+ * factory.
+ * We want our view model's constructor with a date parameter.
  */
 
 public class DetailActivityViewModelFactory extends ViewModelProvider.NewInstanceFactory {
