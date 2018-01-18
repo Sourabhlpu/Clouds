@@ -96,4 +96,6 @@ public class WeatherRepository {
         return mWeatherDao.loadAll(date);
     }
 
+
+
 }
