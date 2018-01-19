@@ -30,6 +30,10 @@ import retrofit2.Response;
 
 /**
  * Created by personal on 12/24/2017.
+ * This class is responsible for fetching the data from the server. The data that is retrieved from
+ * the server is stored as MutableLiveData. This MutableLiveData is observed by the repository.
+ * This class also has methods for starting the service to load data from server and scheduling a
+ * firebase job.
  */
 
 public class WeatherNetworkDataSource {
@@ -50,7 +54,7 @@ public class WeatherNetworkDataSource {
     public static final int NUM_DAYS = 14;
 
 
-
+    // this variable stores the list of data that is fetched from the database.
     private final MutableLiveData<List<WeatherEntity>> mDownloadedWeatherForecast;
 
 
@@ -67,9 +71,18 @@ public class WeatherNetworkDataSource {
         return mDownloadedWeatherForecast;
     }
 
+    /**
+     * This method is responsible for calling the WeatherClient and making a network call.
+     * After the call is made we set the value of the MutableLiveData. As the repository is observing
+     * this LiveData it causes the local database to update itself.
+     */
+
     void fetchWeather()
     {
-
+        /**
+         * the client is created in the dependency injection's NetModule.
+         * We pass in the correct query parameters and get a Call<Weather>.
+         */
 
 
 
@@ -79,12 +92,22 @@ public class WeatherNetworkDataSource {
                 ,String.valueOf(R.string.response_mode)
                 ,String.valueOf(R.string.units));
 
+        /**
+         * call.enque makes an asynchronous request with to callback methods as below.
+         */
+
         call.enqueue(new Callback<Weather>() {
             @Override
             public void onResponse(Call<Weather> call, Response<Weather> response) {
 
+                //now from the response we get the list of the weather forecast.
                 List<Weather.Forecast> forecasts = response.body().getList();
+
+                //as we want this data to be inserted into the database we use getWeatherEntity method
+                // to convert Weather.Forecast into WeatherEntity.
                 List<WeatherEntity> weatherEntities = getWeatherEntity(forecasts);
+
+                //we use postValue when the call occurs off the main thread
                 mDownloadedWeatherForecast.postValue(weatherEntities);
             }
 
@@ -97,6 +120,13 @@ public class WeatherNetworkDataSource {
 
 
     }
+
+    /**
+     * This method maps the server response i.e. Weather.Forecast into WeatherEntity
+     * @param forecasts is the list of forecast data that we receive from the server.
+     *                  We create a Weather class that maps exactly like the server response.
+     * @return The returned value is an object of the type WeatherEntity.
+     */
 
     public List<WeatherEntity> getWeatherEntity(List<Weather.Forecast> forecasts)
     {
@@ -116,6 +146,10 @@ public class WeatherNetworkDataSource {
         return weatherEntity;
     }
 
+    /**
+     * this method just start off the service to fetch data data from server
+     */
+
     public void startFetchWeatherService()
     {
         Intent intentToFetch = new Intent(mContext, CloudsSyncIntentService.class);
@@ -124,6 +158,10 @@ public class WeatherNetworkDataSource {
 
     }
 
+
+    /**
+     * We here use firebase job dispatcher to schedule a recurring task
+     */
     public void scheduleRecurringFetchWeatherSync()
     {
         Driver driver = new GooglePlayDriver(mContext);

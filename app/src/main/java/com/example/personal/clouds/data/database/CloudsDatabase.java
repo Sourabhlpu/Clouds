@@ -17,6 +17,8 @@ import android.util.Log;
  */
 
 @Database(entities = {WeatherEntity.class}, version = 1, exportSchema = false)
+
+//we add the type convertors here and Room performs the conversion automatically.
 @TypeConverters(DateConverter.class)
 public abstract class CloudsDatabase extends RoomDatabase {
 
