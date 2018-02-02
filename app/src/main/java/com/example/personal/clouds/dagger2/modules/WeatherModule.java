@@ -1,5 +1,6 @@
 package com.example.personal.clouds.dagger2.modules;
 
+import com.example.personal.clouds.dagger2.Scopes.CloudsApplicationScope;
 import com.example.personal.clouds.model.pojo.Weather;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -24,6 +25,7 @@ public class WeatherModule {
         mBaseUrl = baseUrl;
     }
 
+    @CloudsApplicationScope
     @Provides
     public Weather weather(Retrofit retrofit)
     {

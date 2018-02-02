@@ -2,6 +2,7 @@ package com.example.personal.clouds.dagger2.modules;
 
 import android.content.Context;
 
+import com.example.personal.clouds.dagger2.Scopes.CloudsApplicationScope;
 import com.example.personal.clouds.data.network.WeatherClient;
 import com.example.personal.clouds.data.network.WeatherNetworkDataSource;
 
@@ -15,7 +16,7 @@ import dagger.Provides;
 @Module(includes = {WeatherModule.class, ContextModule.class})
 public class WeatherNetworkDataSourceModule {
 
-
+    @CloudsApplicationScope
     @Provides
     public WeatherNetworkDataSource weatherNetworkDataSource(WeatherClient client, Context context) {
         return new WeatherNetworkDataSource(client, context);

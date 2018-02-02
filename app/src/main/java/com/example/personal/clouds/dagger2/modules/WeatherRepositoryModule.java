@@ -4,6 +4,7 @@ import android.os.Handler;
 import android.os.Looper;
 
 import com.example.personal.clouds.AppExecutors;
+import com.example.personal.clouds.dagger2.Scopes.CloudsApplicationScope;
 import com.example.personal.clouds.data.WeatherRepository;
 import com.example.personal.clouds.data.database.WeatherDao;
 import com.example.personal.clouds.data.network.WeatherNetworkDataSource;
@@ -20,6 +21,7 @@ import dagger.Provides;
 @Module(includes = {RoomDatabaseModule.class, WeatherNetworkDataSourceModule.class})
 public class WeatherRepositoryModule {
 
+    @CloudsApplicationScope
     @Provides
     public WeatherRepository weatherRepository(WeatherDao weatherDao,
                                                WeatherNetworkDataSource networkDataSource,
@@ -28,6 +30,7 @@ public class WeatherRepositoryModule {
         return new WeatherRepository(weatherDao,networkDataSource,appExecutors);
     }
 
+    @CloudsApplicationScope
     @Provides
     AppExecutors getAppExecutors(AppExecutors.MainThreadExecutor mainThreadExecutor)
     {
