@@ -1,10 +1,12 @@
 package com.example.personal.clouds.dagger2.modules;
 
-import android.app.Application;
 import android.arch.persistence.room.Room;
+import android.content.Context;
 
 import com.example.personal.clouds.data.database.CloudsDatabase;
 import com.example.personal.clouds.data.database.WeatherDao;
+
+import javax.inject.Named;
 
 import dagger.Module;
 import dagger.Provides;
@@ -23,7 +25,7 @@ public class RoomDatabaseModule {
     }
 
     @Provides
-    public CloudsDatabase cloudsDatabase(Application context)
+    public CloudsDatabase cloudsDatabase(@Named("application_context") Context context)
     {
         return  Room
                 .databaseBuilder(context,CloudsDatabase.class,CloudsDatabase.DATABASE_NAME)
