@@ -2,6 +2,7 @@ package com.example.personal.clouds.data.network;
 
 import android.app.Application;
 import android.arch.lifecycle.MutableLiveData;
+import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
@@ -64,6 +65,15 @@ public class WeatherNetworkDataSource {
         Clouds.getNetComponent().inject(this);
     }
 
+    /**
+     * Implement this constructor later so that we can implement dagger 2.
+
+     * @param client
+     * @param context
+     */
+    public WeatherNetworkDataSource(WeatherClient client, Context context) {
+        mDownloadedWeatherForecast = new MutableLiveData<>();
+    }
 
 
     public MutableLiveData<List<WeatherEntity>> getCurrentWeatherForecast()

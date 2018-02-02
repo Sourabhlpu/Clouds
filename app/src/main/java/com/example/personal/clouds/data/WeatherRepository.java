@@ -59,6 +59,22 @@ public class WeatherRepository {
     }
 
     /**
+     * Here we are creating another constructor to implement the dependency injection.
+     * We will be using constructor injection here.
+     * @param weatherDao
+     * @param networkDataSource
+     * @param executors
+     */
+    public WeatherRepository(WeatherDao weatherDao,
+                             WeatherNetworkDataSource networkDataSource,
+                             AppExecutors executors)
+    {
+        mWeatherDao = weatherDao;
+        mWeatherNetworkDataSource = networkDataSource;
+        mExecutors = executors;
+    }
+
+    /**
      * here we make the dicision if we need to start a service to fetch the data
      * First we check the value of mInitialized
      * Then we use a seperate thread to see if the fetch is needed by calling isFetchNeeded.

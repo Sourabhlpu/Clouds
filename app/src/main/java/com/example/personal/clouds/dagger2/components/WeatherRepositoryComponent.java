@@ -1,4 +1,4 @@
-package com.example.personal.clouds.dagger2;
+package com.example.personal.clouds.dagger2.components;
 
 import com.example.personal.clouds.data.WeatherRepository;
 
