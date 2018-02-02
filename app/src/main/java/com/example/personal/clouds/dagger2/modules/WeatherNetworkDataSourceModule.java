@@ -12,7 +12,7 @@ import dagger.Provides;
  * Created by personal on 2/2/2018.
  */
 
-@Module
+@Module(includes = {WeatherModule.class, ContextModule.class})
 public class WeatherNetworkDataSourceModule {
 
 

@@ -17,7 +17,7 @@ import dagger.Provides;
  * Created by personal on 2/2/2018.
  */
 
-@Module
+@Module(includes = {RoomDatabaseModule.class, WeatherNetworkDataSourceModule.class})
 public class WeatherRepositoryModule {
 
     @Provides
@@ -28,21 +28,6 @@ public class WeatherRepositoryModule {
         return new WeatherRepository(weatherDao,networkDataSource,appExecutors);
     }
 
-    
-    @Provides
-    Handler providesHandler()
-    {
-        return new Handler(Looper.getMainLooper());
-    }
-
-
-    @Provides
-    AppExecutors.MainThreadExecutor getMainThreadExecutor()
-    {
-        return new AppExecutors.MainThreadExecutor();
-    }
-
-
     @Provides
     AppExecutors getAppExecutors(AppExecutors.MainThreadExecutor mainThreadExecutor)
     {
@@ -50,4 +35,22 @@ public class WeatherRepositoryModule {
                 Executors.newFixedThreadPool(3)
                 ,mainThreadExecutor);
     }
+
+    @Provides
+    AppExecutors.MainThreadExecutor getMainThreadExecutor()
+    {
+        return new AppExecutors.MainThreadExecutor();
+    }
+
+    @Provides
+    Handler providesHandler()
+    {
+        return new Handler(Looper.getMainLooper());
+    }
+
+
+
+
+
+
 }

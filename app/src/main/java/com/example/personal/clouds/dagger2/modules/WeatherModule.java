@@ -14,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by personal on 2/2/2018.
  */
 
-@Module
+@Module(includes = OkHttpClient.class)
 public class WeatherModule {
 
     String mBaseUrl;

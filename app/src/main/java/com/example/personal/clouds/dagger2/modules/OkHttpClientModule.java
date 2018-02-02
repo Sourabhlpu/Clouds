@@ -14,7 +14,7 @@ import okhttp3.logging.HttpLoggingInterceptor;
  * Created by personal on 2/2/2018.
  */
 
-@Module
+@Module(includes = ContextModule.class)
 public class OkHttpClientModule {
 
     @Provides
