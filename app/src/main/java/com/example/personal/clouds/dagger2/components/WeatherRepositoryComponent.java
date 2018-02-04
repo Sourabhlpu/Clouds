@@ -1,6 +1,7 @@
 package com.example.personal.clouds.dagger2.components;
 
 import com.example.personal.clouds.dagger2.Scopes.CloudsApplicationScope;
+import com.example.personal.clouds.dagger2.modules.WeatherRepositoryModule;
 import com.example.personal.clouds.data.WeatherRepository;
 
 import dagger.Component;
@@ -10,7 +11,7 @@ import dagger.Component;
  */
 
 @CloudsApplicationScope
-@Component(modules = WeatherRepository.class)
+@Component(modules = WeatherRepositoryModule.class)
 public interface WeatherRepositoryComponent {
 
     WeatherRepository getWeatherRepository();

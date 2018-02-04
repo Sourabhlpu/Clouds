@@ -6,12 +6,13 @@ import com.example.personal.clouds.dagger2.Scopes.CloudsApplicationScope;
 
 import javax.inject.Named;
 
+import dagger.Module;
 import dagger.Provides;
 
 /**
  * Created by personal on 2/2/2018.
  */
-
+@Module
 public class ContextModule {
 
     Context context;
