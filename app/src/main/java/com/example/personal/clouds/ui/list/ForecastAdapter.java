@@ -34,7 +34,7 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.Foreca
 
     private List<WeatherEntity> mForecast;
 
-    ForecastAdapter(Context context, ForecastAdapterOnItemClickHandler clickHandler)
+    public ForecastAdapter(Context context, ForecastAdapterOnItemClickHandler clickHandler)
     {
         mContext = context;
         mClickHandler = clickHandler;

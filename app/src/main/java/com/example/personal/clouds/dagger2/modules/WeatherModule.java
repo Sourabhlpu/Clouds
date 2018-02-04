@@ -1,7 +1,7 @@
 package com.example.personal.clouds.dagger2.modules;
 
 import com.example.personal.clouds.dagger2.Scopes.CloudsApplicationScope;
-import com.example.personal.clouds.model.pojo.Weather;
+import com.example.personal.clouds.data.network.WeatherClient;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -27,9 +27,9 @@ public class WeatherModule {
 
     @CloudsApplicationScope
     @Provides
-    public Weather weather(Retrofit retrofit)
+    public WeatherClient weatherClient(Retrofit retrofit)
     {
-        return retrofit.create(Weather.class);
+        return retrofit.create(WeatherClient.class);
     }
 
     @Provides
