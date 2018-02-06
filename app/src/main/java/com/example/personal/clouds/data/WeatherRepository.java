@@ -29,17 +29,37 @@ public class WeatherRepository {
     private static final String LOG_TAG = WeatherRepository.class.getName();
 
 
-    @Inject
+
     public WeatherDao mWeatherDao;
-    @Inject
+
     public WeatherNetworkDataSource mWeatherNetworkDataSource;
-    @Inject
+
     public AppExecutors mExecutors;
     private boolean mInitialized = false;
 
+    /**
+     * Here we are creating another constructor to implement the dependency injection.
+     * We will be using constructor injection here.
+     * @param weatherDao
+     * @param networkDataSource
+     * @param executors
+     */
+
+    @Inject
+    public WeatherRepository(WeatherDao weatherDao,
+                             WeatherNetworkDataSource networkDataSource,
+                             AppExecutors executors)
+    {
+        mWeatherDao = weatherDao;
+        mWeatherNetworkDataSource = networkDataSource;
+        mExecutors = executors;
+    }
+
     public WeatherRepository() {
 
-        Clouds.getNetComponent().inject(this);
+        Clouds.getWeatherRepositoryComponent().injectWeatherRepository(this);
+
+
 
         //We get the WeatherEntity from the network. We retrieve it here
         LiveData<List<WeatherEntity>> networkData = mWeatherNetworkDataSource.getCurrentWeatherForecast();
@@ -58,21 +78,7 @@ public class WeatherRepository {
 
     }
 
-    /**
-     * Here we are creating another constructor to implement the dependency injection.
-     * We will be using constructor injection here.
-     * @param weatherDao
-     * @param networkDataSource
-     * @param executors
-     */
-    public WeatherRepository(WeatherDao weatherDao,
-                             WeatherNetworkDataSource networkDataSource,
-                             AppExecutors executors)
-    {
-        mWeatherDao = weatherDao;
-        mWeatherNetworkDataSource = networkDataSource;
-        mExecutors = executors;
-    }
+
 
     /**
      * here we make the dicision if we need to start a service to fetch the data

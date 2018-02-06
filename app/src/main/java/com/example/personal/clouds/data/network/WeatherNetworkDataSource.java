@@ -7,8 +7,8 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.example.personal.clouds.R;
+import com.example.personal.clouds.dagger2.components.Clouds;
 import com.example.personal.clouds.data.database.WeatherEntity;
-import com.example.personal.clouds.di.components.Clouds;
 import com.example.personal.clouds.model.pojo.Weather;
 import com.firebase.jobdispatcher.Constraint;
 import com.firebase.jobdispatcher.Driver;
@@ -41,9 +41,8 @@ public class WeatherNetworkDataSource {
 
     private static final String LOG_TAG = WeatherNetworkDataSource.class.getSimpleName();
 
-    @Inject
+
     WeatherClient client;
-    @Inject
     Application mContext;
 
     // Interval at which to sync with the weather. Use TimeUnit for convenience, rather than
@@ -58,21 +57,16 @@ public class WeatherNetworkDataSource {
     // this variable stores the list of data that is fetched from the database.
     private final MutableLiveData<List<WeatherEntity>> mDownloadedWeatherForecast;
 
-
-    public WeatherNetworkDataSource()
-    {
-        mDownloadedWeatherForecast = new MutableLiveData<>();
-        Clouds.getNetComponent().inject(this);
-    }
-
     /**
      * Implement this constructor later so that we can implement dagger 2.
 
      * @param client
      * @param context
      */
+    @Inject
     public WeatherNetworkDataSource(WeatherClient client, Context context) {
         mDownloadedWeatherForecast = new MutableLiveData<>();
+        Clouds.getWeatherRepositoryComponent().injectWeatherNetworkDataSource(this);
     }
 
 

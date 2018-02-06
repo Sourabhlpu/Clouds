@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
-import com.example.personal.clouds.di.components.Clouds;
+import com.example.personal.clouds.dagger2.components.Clouds;
 
 import javax.inject.Inject;
 
@@ -29,7 +29,7 @@ public class CloudsSyncIntentService extends IntentService {
 
         Log.d(LOG_TAG, "Intent service started");
 
-        Clouds.getNetComponent().inject(this);
+        Clouds.getWeatherRepositoryComponent().injectCloudsSyncIntentService(this);
         networkDataSource.fetchWeather();
 
     }

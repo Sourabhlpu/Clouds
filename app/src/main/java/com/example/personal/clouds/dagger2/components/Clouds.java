@@ -11,7 +11,7 @@ import com.example.personal.clouds.dagger2.modules.ContextModule;
 
 public class Clouds extends Application {
 
-    private WeatherRepositoryComponent weatherRepositoryComponent;
+    private static WeatherRepositoryComponent weatherRepositoryComponent;
 
     public static Clouds get(Activity activity)
     {
@@ -27,7 +27,7 @@ public class Clouds extends Application {
                 .build();
     }
 
-    public WeatherRepositoryComponent getWeatherRepositoryComponent()
+    public static WeatherRepositoryComponent getWeatherRepositoryComponent()
     {
         return weatherRepositoryComponent;
     }
