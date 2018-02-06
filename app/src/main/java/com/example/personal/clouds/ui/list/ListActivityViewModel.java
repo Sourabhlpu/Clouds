@@ -3,6 +3,7 @@ package com.example.personal.clouds.ui.list;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
 
+import com.example.personal.clouds.dagger2.components.Clouds;
 import com.example.personal.clouds.data.WeatherRepository;
 import com.example.personal.clouds.data.database.WeatherEntity;
 
@@ -23,6 +24,7 @@ public class ListActivityViewModel extends ViewModel {
     private Date mDate;
     public ListActivityViewModel(Date date)
     {
+        Clouds.getWeatherRepositoryComponent().injectListActivityViewModel(this);
         mDate = date;
         mWeatherList = mRepository.getWeatherList(mDate);
     }
