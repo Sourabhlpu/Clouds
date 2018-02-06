@@ -11,6 +11,7 @@ import android.widget.ProgressBar;
 
 import com.example.personal.clouds.R;
 import com.example.personal.clouds.dagger2.components.Clouds;
+import com.example.personal.clouds.dagger2.components.DaggerListActivityComponent;
 import com.example.personal.clouds.dagger2.components.ListActivityComponent;
 import com.example.personal.clouds.dagger2.modules.ListActivityModule;
 

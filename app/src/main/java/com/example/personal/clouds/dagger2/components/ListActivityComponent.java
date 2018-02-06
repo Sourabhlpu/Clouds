@@ -1,6 +1,7 @@
 package com.example.personal.clouds.dagger2.components;
 
 import com.example.personal.clouds.dagger2.Scopes.ListActivityScope;
+import com.example.personal.clouds.dagger2.modules.ListActivityModule;
 import com.example.personal.clouds.ui.list.ListActivity;
 
 import dagger.Component;
@@ -9,7 +10,7 @@ import dagger.Component;
  * Created by personal on 2/4/2018.
  */
 
-@Component(dependencies = WeatherRepositoryComponent.class)
+@Component(modules = ListActivityModule.class, dependencies = WeatherRepositoryComponent.class)
 @ListActivityScope
 public interface ListActivityComponent {
 
