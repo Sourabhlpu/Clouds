@@ -4,7 +4,6 @@ import com.example.personal.clouds.dagger2.Scopes.ListActivityScope;
 import com.example.personal.clouds.ui.list.ForecastAdapter;
 import com.example.personal.clouds.ui.list.ListActivity;
 import com.example.personal.clouds.ui.list.ListActivityViewModelFactory;
-import com.example.personal.clouds.utilities.CloudsDateUtils;
 
 import java.util.Date;
 
@@ -21,10 +20,10 @@ public class ListActivityModule {
     private final ListActivity listActivity;
     private final Date mDate;
 
-    public ListActivityModule(ListActivity listActivity)
+    public ListActivityModule(ListActivity listActivity, Date date)
     {
         this.listActivity = listActivity;
-        mDate = CloudsDateUtils.getNormalizedUtcDateForToday();
+        mDate = date;
     }
 
     @Provides

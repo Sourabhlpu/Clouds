@@ -10,8 +10,12 @@ import android.view.View;
 import android.widget.ProgressBar;
 
 import com.example.personal.clouds.R;
-import com.example.personal.clouds.di.components.Clouds;
+import com.example.personal.clouds.dagger2.components.Clouds;
+import com.example.personal.clouds.dagger2.components.ListActivityComponent;
+import com.example.personal.clouds.dagger2.modules.ListActivityModule;
+
 import com.example.personal.clouds.ui.detail.DetailActivity;
+import com.example.personal.clouds.utilities.CloudsDateUtils;
 
 import java.util.Date;
 
@@ -22,7 +26,9 @@ public class ListActivity extends AppCompatActivity implements ForecastAdapter.F
     @Inject
     ListActivityViewModelFactory factory;
 
-    private ForecastAdapter mForecastAdapter;
+    @Inject
+    ForecastAdapter mForecastAdapter;
+
     private RecyclerView mRecyclerView;
     private int mPosition = RecyclerView.NO_POSITION;
     private ProgressBar mLoadingIndicator;
@@ -36,6 +42,8 @@ public class ListActivity extends AppCompatActivity implements ForecastAdapter.F
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forecast);
 
+        injectDependencies();
+
         mRecyclerView = (RecyclerView)findViewById(R.id.recyclerview_forecast);
 
         mLoadingIndicator = (ProgressBar)findViewById(R.id.pb_loading_indicator);
@@ -47,11 +55,10 @@ public class ListActivity extends AppCompatActivity implements ForecastAdapter.F
 
         mRecyclerView.setHasFixedSize(true);
 
-        mForecastAdapter = new ForecastAdapter(this,this);
+
 
         mRecyclerView.setAdapter(mForecastAdapter);
 
-        Clouds.getNetComponent().inject(this);
 
        viewModel = ViewModelProviders.of(this,factory).get(ListActivityViewModel.class);
 
@@ -91,5 +98,15 @@ public class ListActivity extends AppCompatActivity implements ForecastAdapter.F
         mRecyclerView.setVisibility(View.INVISIBLE);
         // Finally, show the loading indicator
         mLoadingIndicator.setVisibility(View.VISIBLE);
+    }
+
+    private void injectDependencies()
+    {
+        ListActivityComponent listActivityComponent = DaggerListActivityComponent.builder()
+                .listActivityModule(new ListActivityModule(this, CloudsDateUtils.getNormalizedUtcDateForToday()))
+                .weatherRepositoryComponent(Clouds.get(this).getWeatherRepositoryComponent())
+                .build();
+
+        listActivityComponent.injectListActivity(this);
     }
 }

@@ -1,10 +1,7 @@
 package com.example.personal.clouds.dagger2.components;
 
-import android.support.v7.widget.RecyclerView;
-
 import com.example.personal.clouds.dagger2.Scopes.ListActivityScope;
-import com.example.personal.clouds.ui.list.ForecastAdapter;
-import com.example.personal.clouds.ui.list.ListActivityViewModelFactory;
+import com.example.personal.clouds.ui.list.ListActivity;
 
 import dagger.Component;
 
@@ -16,8 +13,6 @@ import dagger.Component;
 @ListActivityScope
 public interface ListActivityComponent {
 
-    ForecastAdapter getForecastAdapter();
-    RecyclerView.LayoutManager getLayoutManager();
-    ListActivityViewModelFactory getListActivityViewModelFactory();
+    void injectListActivity(ListActivity listActivity);
 
 }

@@ -4,10 +4,10 @@ import android.arch.lifecycle.LiveData;
 import android.util.Log;
 
 import com.example.personal.clouds.AppExecutors;
+import com.example.personal.clouds.dagger2.components.Clouds;
 import com.example.personal.clouds.data.database.WeatherDao;
 import com.example.personal.clouds.data.database.WeatherEntity;
 import com.example.personal.clouds.data.network.WeatherNetworkDataSource;
-import com.example.personal.clouds.di.components.Clouds;
 import com.example.personal.clouds.utilities.CloudsDateUtils;
 
 import java.util.Date;

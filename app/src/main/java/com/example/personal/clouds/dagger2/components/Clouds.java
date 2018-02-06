@@ -23,7 +23,7 @@ public class Clouds extends Application {
         super.onCreate();
 
         weatherRepositoryComponent = DaggerWeatherRepositoryComponent.builder()
-                .ContextModule(new ContextModule(this))
+                .contextModule(new ContextModule(this))
                 .build();
     }
 
