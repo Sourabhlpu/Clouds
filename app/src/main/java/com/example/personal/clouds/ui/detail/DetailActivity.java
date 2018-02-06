@@ -6,13 +6,18 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.personal.clouds.R;
+import com.example.personal.clouds.dagger2.components.Clouds;
+import com.example.personal.clouds.dagger2.components.DaggerDetailActivityComponent;
+import com.example.personal.clouds.dagger2.components.DetailActivityComponent;
+import com.example.personal.clouds.dagger2.modules.DetailActivityModule;
 import com.example.personal.clouds.data.database.WeatherEntity;
 import com.example.personal.clouds.databinding.ActivityDetailBinding;
 import com.example.personal.clouds.utilities.CloudsDateUtils;
 import com.example.personal.clouds.utilities.CloudsWeatherUtils;
-import com.example.personal.clouds.utilities.InjectorUtils;
 
 import java.util.Date;
+
+import javax.inject.Inject;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -20,7 +25,8 @@ public class DetailActivity extends AppCompatActivity {
 
 
 
-
+    @Inject
+    DetailActivityViewModelFactory factory;
 
     private DetailActivityViewModel mViewModel;
     private ActivityDetailBinding mDetailBinding;
@@ -32,8 +38,7 @@ public class DetailActivity extends AppCompatActivity {
         long timestamp = getIntent().getLongExtra(WEATHER_ID_EXTRA, -1);
         Date date = new Date(timestamp);
 
-        DetailActivityViewModelFactory factory = InjectorUtils
-                .provideDetailViewModelFactory(date);
+
 
 
         /**
@@ -176,5 +181,16 @@ public class DetailActivity extends AppCompatActivity {
         mDetailBinding.extraDetails.pressure.setText(pressureString);
         mDetailBinding.extraDetails.pressure.setContentDescription(pressureA11y);
         mDetailBinding.extraDetails.pressureLabel.setContentDescription(pressureA11y);
+    }
+
+    private void injectDependencies(Date date)
+    {
+
+        DetailActivityComponent detailActivityComponent = DaggerDetailActivityComponent.builder()
+                .detailActivityModule(new DetailActivityModule(this,date))
+                .weatherRepositoryComponent(Clouds.get(this).getWeatherRepositoryComponent())
+                .build();
+
+        detailActivityComponent.injectDetailActivity(this);
     }
 }
