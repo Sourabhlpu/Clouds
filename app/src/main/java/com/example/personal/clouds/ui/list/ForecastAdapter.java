@@ -14,7 +14,6 @@ import com.example.personal.clouds.data.database.WeatherEntity;
 import com.example.personal.clouds.utilities.CloudsDateUtils;
 import com.example.personal.clouds.utilities.CloudsWeatherUtils;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -67,9 +66,9 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.Foreca
          * Weather Date *
          ****************/
 
-        long dateInMillis = currentWeather.getDate().getTime();
+        long dateInMillis = currentWeather.getDate();
 
-        String dateString = CloudsDateUtils.getFriendlyDateString(mContext,dateInMillis,false);
+        String dateString = CloudsDateUtils.getFriendlyDateString1(mContext,dateInMillis,false);
 
         holder.dateView.setText(dateString);
 
@@ -146,7 +145,7 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.Foreca
 
 
     public interface ForecastAdapterOnItemClickHandler {
-        void onItemClick(Date date);
+        void onItemClick(Long date);
     }
 
     private int getLayoutIdByType(int viewType)
@@ -193,7 +192,7 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.Foreca
         @Override
         public void onClick(View view) {
             int adapterPosition = getAdapterPosition();
-            Date date = mForecast.get(adapterPosition).getDate();
+            Long date = mForecast.get(adapterPosition).getDate();
             mClickHandler.onItemClick(date);
 
         }

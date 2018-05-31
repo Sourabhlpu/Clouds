@@ -79,7 +79,7 @@ public class DetailActivity extends AppCompatActivity {
          * Weather Date *
          ****************/
 
-        long localDateMidnightGmt = weatherEntity.getDate().getTime();
+        long localDateMidnightGmt = weatherEntity.getDate();
         String dateText = CloudsDateUtils.getFriendlyDateString(DetailActivity.this,localDateMidnightGmt, true);
         mDetailBinding.primaryInfo.date.setText(dateText);
 

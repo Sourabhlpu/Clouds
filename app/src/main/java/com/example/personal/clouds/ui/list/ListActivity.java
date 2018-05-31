@@ -19,8 +19,6 @@ import com.example.personal.clouds.dagger2.modules.ListActivityModule;
 import com.example.personal.clouds.ui.detail.DetailActivity;
 import com.example.personal.clouds.utilities.CloudsDateUtils;
 
-import java.util.Date;
-
 import javax.inject.Inject;
 
 public class ListActivity extends AppCompatActivity implements ForecastAdapter.ForecastAdapterOnItemClickHandler {
@@ -84,10 +82,10 @@ public class ListActivity extends AppCompatActivity implements ForecastAdapter.F
     }
 
     @Override
-    public void onItemClick(Date date) {
+    public void onItemClick(Long date) {
 
         Intent weatherDetailIntent = new Intent(ListActivity.this, DetailActivity.class);
-        long timestamp = date.getTime();
+        long timestamp = date;
         weatherDetailIntent.putExtra(DetailActivity.WEATHER_ID_EXTRA, timestamp);
         startActivity(weatherDetailIntent);
 

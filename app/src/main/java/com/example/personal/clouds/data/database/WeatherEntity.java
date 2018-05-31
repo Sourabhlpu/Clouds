@@ -5,8 +5,6 @@ import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 
-import java.util.Date;
-
 /**
  * Created by personal on 12/18/2017.
  * Entity class acts as a mapping of database table into the objects.
@@ -41,7 +39,7 @@ public class WeatherEntity {
      *
      */
     private int weatherIconId;
-    private Date date;
+    private Long date;
     private double min;
     private double max;
     private double humidity;
@@ -64,7 +62,7 @@ public class WeatherEntity {
      */
 
 
-    public WeatherEntity(int id, int weatherIconId, Date date, double min, double max, double humidity, double pressure, double wind, double degrees) {
+    public WeatherEntity(int id, int weatherIconId, Long date, double min, double max, double humidity, double pressure, double wind, double degrees) {
         this.id = id;
         this.weatherIconId = weatherIconId;
         this.date = date;
@@ -89,7 +87,7 @@ public class WeatherEntity {
      */
 
     @Ignore
-    public WeatherEntity(int weatherIconId, Date date, double min, double max, double humidity, double pressure, double wind, double degrees) {
+    public WeatherEntity(int weatherIconId, Long date, double min, double max, double humidity, double pressure, double wind, double degrees) {
         this.weatherIconId = weatherIconId;
         this.date = date;
         this.min = min;
@@ -104,7 +102,7 @@ public class WeatherEntity {
         return id;
     }
 
-    public Date getDate() {
+    public Long getDate() {
         return date;
     }
 

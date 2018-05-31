@@ -18,7 +18,7 @@ import com.firebase.jobdispatcher.Lifetime;
 import com.firebase.jobdispatcher.Trigger;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -145,19 +145,29 @@ public class WeatherNetworkDataSource {
     {
         Log.d("networkDataSource", "getWeatherEntity called");
         List<WeatherEntity> weatherEntity = new ArrayList<WeatherEntity>();
+        int index = 0;
+
         for(Weather.Forecast forecast : forecasts )
         {
             weatherEntity.add(new WeatherEntity(forecast.getWeatherList().get(0).getId(),
-                    new Date(forecast.getDt())
+                     createDate(index)
                     ,forecast.getTemp().getTemp_min()
                     ,forecast.getTemp().getTemp_max()
                     ,forecast.getHumidity()
                     ,forecast.getSpeed()
                     ,forecast.getDeg()
                     ,forecast.getPressure()));
+
+            index++;
         }
 
         return weatherEntity;
+    }
+
+
+    private Long createDate(int index)
+    {
+        return Calendar.getInstance().getTimeInMillis() + TimeUnit.DAYS.toMillis(index);
     }
 
     /**
