@@ -50,16 +50,10 @@ public class WeatherRepository {
                              WeatherNetworkDataSource networkDataSource,
                              AppExecutors executors)
     {
+        Clouds.getWeatherRepositoryComponent().injectWeatherRepository(this);
         mWeatherDao = weatherDao;
         mWeatherNetworkDataSource = networkDataSource;
         mExecutors = executors;
-    }
-
-    public WeatherRepository() {
-
-        Clouds.getWeatherRepositoryComponent().injectWeatherRepository(this);
-
-
 
         //We get the WeatherEntity from the network. We retrieve it here
         LiveData<List<WeatherEntity>> networkData = mWeatherNetworkDataSource.getCurrentWeatherForecast();
@@ -76,9 +70,8 @@ public class WeatherRepository {
             });
         });
 
+
     }
-
-
 
     /**
      * here we make the dicision if we need to start a service to fetch the data
@@ -88,11 +81,13 @@ public class WeatherRepository {
      */
     public synchronized void initializeData()
     {
+        Log.d("WeatherRepository", "initializeData called");
         if(mInitialized) return;
         mInitialized = true;
 
         mExecutors.diskIO.execute(() -> {
             if(isFetchNeeded()) {
+                Log.d("WeatherRepository", "starting the service to fetch the data");
                 startFetchWeatherService();
             }
         });
@@ -103,6 +98,7 @@ public class WeatherRepository {
      */
     private void deleteOldData()
     {
+        Log.d("WeatherRepository", "deleting the old data");
        Date date = CloudsDateUtils.getNormalizedUtcDateForToday();
        mWeatherDao.deleteOldWeather(date);
     }
@@ -114,6 +110,7 @@ public class WeatherRepository {
      */
     private boolean isFetchNeeded()
     {
+        Log.d("WeatherRepository", "isFetchNeeded called");
         Date date = CloudsDateUtils.getNormalizedUtcDateForToday();
 
         //we get the number of days of data that is in the database after this date.
@@ -127,6 +124,7 @@ public class WeatherRepository {
     //Method to start the service for the server data load
     private void startFetchWeatherService()
     {
+        Log.d("WeatherRepository", "startFetchWeatherService called");
         mWeatherNetworkDataSource.startFetchWeatherService();
     }
 
@@ -137,6 +135,7 @@ public class WeatherRepository {
      */
     public LiveData<WeatherEntity> getWeatherByDate(Date date)
     {
+        Log.d("WeatherRepository", "getWeatherByDate called");
         initializeData();
         return mWeatherDao.getWeatherByDate(date);
     }
@@ -148,8 +147,14 @@ public class WeatherRepository {
      */
     public LiveData<List<WeatherEntity>> getWeatherList(Date date)
     {
+        Log.d("WeatherRepository", "getWeatherList called" + "date is " + date );
         initializeData();
         return mWeatherDao.loadAll(date);
+    }
+
+    public LiveData<List<WeatherEntity>> loadAllData()
+    {
+        return mWeatherDao.loadAllData();
     }
 
 

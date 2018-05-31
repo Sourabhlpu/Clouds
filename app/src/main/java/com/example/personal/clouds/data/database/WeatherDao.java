@@ -42,4 +42,7 @@ public interface WeatherDao {
     //lets just delete some old useless data.
     @Query("DELETE FROM weather where date < :date")
     void deleteOldWeather(Date date);
+
+    @Query("SELECT * FROM weather")
+    LiveData<List<WeatherEntity>> loadAllData();
 }

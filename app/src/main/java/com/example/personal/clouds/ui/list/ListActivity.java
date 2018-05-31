@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 
@@ -41,6 +42,8 @@ public class ListActivity extends AppCompatActivity implements ForecastAdapter.F
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Log.d("ListActivity", "onCreate of ListActivity called");
         setContentView(R.layout.activity_forecast);
 
         injectDependencies();
@@ -61,11 +64,14 @@ public class ListActivity extends AppCompatActivity implements ForecastAdapter.F
         mRecyclerView.setAdapter(mForecastAdapter);
 
 
+        Log.d("ListActivity", "initializing view model");
        viewModel = ViewModelProviders.of(this,factory).get(ListActivityViewModel.class);
 
-       viewModel.getWeatherList().observe(this, weatherEntities -> {
+        Log.d("ListActivity", "getting the list of weather entries and oberving the list");
+       viewModel.getData().observe(this, weatherEntities -> {
 
-
+           Log.d("ListActivity", "new weatherEntities created");
+           Log.d("ListActivity", "the size of weather entries is " + weatherEntities.size());
            mForecastAdapter.swapForecast(weatherEntities);
            if(mPosition == RecyclerView.NO_POSITION) mPosition = 0;
            mRecyclerView.smoothScrollToPosition(mPosition);

@@ -1,6 +1,5 @@
 package com.example.personal.clouds.data.network;
 
-import android.app.Application;
 import android.arch.lifecycle.MutableLiveData;
 import android.content.Context;
 import android.content.Intent;
@@ -29,6 +28,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+
+
 /**
  * Created by personal on 12/24/2017.
  * This class is responsible for fetching the data from the server. The data that is retrieved from
@@ -43,7 +44,7 @@ public class WeatherNetworkDataSource {
 
 
     WeatherClient client;
-    Application mContext;
+    Context mContext;
 
     // Interval at which to sync with the weather. Use TimeUnit for convenience, rather than
     // writing out a bunch of multiplication ourselves and risk making a silly mistake.
@@ -67,11 +68,14 @@ public class WeatherNetworkDataSource {
     public WeatherNetworkDataSource(WeatherClient client, Context context) {
         mDownloadedWeatherForecast = new MutableLiveData<>();
         Clouds.getWeatherRepositoryComponent().injectWeatherNetworkDataSource(this);
+        mContext = context;
+        this.client = client;
     }
 
 
     public MutableLiveData<List<WeatherEntity>> getCurrentWeatherForecast()
     {
+        Log.d("networkDataSource", "getCurrentWeatherForecast called");
         return mDownloadedWeatherForecast;
     }
 
@@ -90,11 +94,12 @@ public class WeatherNetworkDataSource {
 
 
 
+        Log.d("networkDataSource", "fetchWeather called");
         Call<Weather> call = client.forecastForDays("201301" + ",in"
-                ,String.valueOf(R.string.api_key)
-                ,String.valueOf(R.string.days_forecast)
-                ,String.valueOf(R.string.response_mode)
-                ,String.valueOf(R.string.units));
+                ,mContext.getString(R.string.api_key)
+                ,mContext.getString(R.string.days_forecast)
+                ,mContext.getString(R.string.response_mode)
+                ,mContext.getString(R.string.units));
 
         /**
          * call.enque makes an asynchronous request with to callback methods as below.
@@ -104,6 +109,9 @@ public class WeatherNetworkDataSource {
             @Override
             public void onResponse(Call<Weather> call, Response<Weather> response) {
 
+                Log.d("networkDataSource", "onResponse called");
+
+                Log.d("newtorkDataSource", "response is " + response.raw());
                 //now from the response we get the list of the weather forecast.
                 List<Weather.Forecast> forecasts = response.body().getList();
 
@@ -118,6 +126,7 @@ public class WeatherNetworkDataSource {
             @Override
             public void onFailure(Call<Weather> call, Throwable t) {
 
+                Log.d("networkDataSource", "onFailure called");
             }
         });
 
@@ -134,17 +143,18 @@ public class WeatherNetworkDataSource {
 
     public List<WeatherEntity> getWeatherEntity(List<Weather.Forecast> forecasts)
     {
+        Log.d("networkDataSource", "getWeatherEntity called");
         List<WeatherEntity> weatherEntity = new ArrayList<WeatherEntity>();
         for(Weather.Forecast forecast : forecasts )
         {
             weatherEntity.add(new WeatherEntity(forecast.getWeatherList().get(0).getId(),
                     new Date(forecast.getDt())
-                    ,forecast.getMain().getTemp_min()
-                    ,forecast.getMain().getTemp_max()
-                    ,forecast.getMain().getHumidity()
-                    ,forecast.getWind().getSpeed()
-                    ,forecast.getWind().getDeg()
-                    ,forecast.getMain().getPressure()));
+                    ,forecast.getTemp().getTemp_min()
+                    ,forecast.getTemp().getTemp_max()
+                    ,forecast.getHumidity()
+                    ,forecast.getSpeed()
+                    ,forecast.getDeg()
+                    ,forecast.getPressure()));
         }
 
         return weatherEntity;
@@ -156,6 +166,7 @@ public class WeatherNetworkDataSource {
 
     public void startFetchWeatherService()
     {
+        Log.d("networkDataSource", "startFetchWeatherService called");
         Intent intentToFetch = new Intent(mContext, CloudsSyncIntentService.class);
         mContext.startService(intentToFetch);
         Log.d(LOG_TAG,"Service Created");

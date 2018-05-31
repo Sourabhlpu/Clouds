@@ -28,8 +28,8 @@ public class DetailActivity extends AppCompatActivity {
     @Inject
     DetailActivityViewModelFactory factory;
 
-    private DetailActivityViewModel mViewModel;
-    private ActivityDetailBinding mDetailBinding;
+     DetailActivityViewModel mViewModel;
+     ActivityDetailBinding mDetailBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +38,7 @@ public class DetailActivity extends AppCompatActivity {
         long timestamp = getIntent().getLongExtra(WEATHER_ID_EXTRA, -1);
         Date date = new Date(timestamp);
 
-
+        injectDependencies(date);
 
 
         /**

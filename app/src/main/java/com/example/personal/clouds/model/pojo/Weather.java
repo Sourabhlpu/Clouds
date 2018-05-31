@@ -58,34 +58,50 @@ public class Weather {
 
     public class Forecast {
         private long dt;
-        private Main main;
-        private Wind wind;
+        private Temp temp;
         private List<WeatherList> weather;
+        private double pressure;
+        private int humidity;
+        private double speed;
+        private double deg;
 
         public long getDt()
         {
             return dt;
         }
-        public Main getMain()
+        public Temp getTemp()
         {
-            return main;
+            return temp;
         }
-        public Wind getWind()
-        {
-            return wind;
-        }
+
         public List<WeatherList> getWeatherList()
         {
             return weather;
         }
 
+        public double getPressure()
+        {
+            return pressure;
+        }
+        public int getHumidity()
+        {
+            return humidity;
+        }
+        public double getSpeed()
+        {
+            return speed;
+        }
+        public double getDeg()
+        {
+            return deg;
+        }
+
     }
 
-    public class Main {
+    public class Temp {
         private double temp_min;
         private double temp_max;
-        private double pressure;
-        private int humidity;
+
 
         public double getTemp_min()
         {
@@ -96,28 +112,6 @@ public class Weather {
         {
             return temp_max;
         }
-        public double getPressure()
-        {
-            return pressure;
-        }
-        public int getHumidity()
-        {
-            return humidity;
-        }
-    }
-
-    public class Wind {
-       private double speed;
-       private double deg;
-
-       public double getSpeed()
-       {
-           return getSpeed();
-       }
-       public double getDeg()
-       {
-           return deg;
-       }
 
     }
 
