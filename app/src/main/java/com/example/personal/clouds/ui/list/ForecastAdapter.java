@@ -219,7 +219,7 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.Foreca
 
     void swapForecast(final List<WeatherEntity> newForecast)
     {
-        if(mForecast == null)
+        if(mForecast == null || mForecast.isEmpty())
         {
             mForecast = newForecast;
             notifyDataSetChanged();

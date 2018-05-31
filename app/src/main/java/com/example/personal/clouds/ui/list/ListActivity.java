@@ -66,7 +66,7 @@ public class ListActivity extends AppCompatActivity implements ForecastAdapter.F
        viewModel = ViewModelProviders.of(this,factory).get(ListActivityViewModel.class);
 
         Log.d("ListActivity", "getting the list of weather entries and oberving the list");
-       viewModel.getData().observe(this, weatherEntities -> {
+       viewModel.getWeatherList().observe(this, weatherEntities -> {
 
            Log.d("ListActivity", "new weatherEntities created");
            Log.d("ListActivity", "the size of weather entries is " + weatherEntities.size());

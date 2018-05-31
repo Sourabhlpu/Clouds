@@ -99,18 +99,18 @@ public class Weather {
     }
 
     public class Temp {
-        private double temp_min;
-        private double temp_max;
+        private double min;
+        private double max;
 
 
         public double getTemp_min()
         {
-            return temp_min;
+            return min;
         }
 
         public double getTemp_max()
         {
-            return temp_max;
+            return max;
         }
 
     }
