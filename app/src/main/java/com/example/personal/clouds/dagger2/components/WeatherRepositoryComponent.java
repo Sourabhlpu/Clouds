@@ -3,6 +3,7 @@ package com.example.personal.clouds.dagger2.components;
 import com.example.personal.clouds.dagger2.Scopes.CloudsApplicationScope;
 import com.example.personal.clouds.dagger2.modules.WeatherRepositoryModule;
 import com.example.personal.clouds.data.WeatherRepository;
+import com.example.personal.clouds.data.network.CloudsFirebaseJobService;
 import com.example.personal.clouds.data.network.CloudsSyncIntentService;
 import com.example.personal.clouds.data.network.WeatherNetworkDataSource;
 import com.example.personal.clouds.ui.detail.DetailActivityViewModel;
@@ -23,4 +24,5 @@ public interface WeatherRepositoryComponent {
     void injectDetailActivityViewModel(DetailActivityViewModel detailActivityViewModel);
     void injectListActivityViewModel(ListActivityViewModel listActivityViewModel);
     void injectCloudsSyncIntentService (CloudsSyncIntentService cloudsSyncIntentService);
+    void injectCloudsFirebaseJobService(CloudsFirebaseJobService cloudsFirebaseJobService);
 }

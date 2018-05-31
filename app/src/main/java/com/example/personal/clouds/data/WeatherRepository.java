@@ -85,6 +85,8 @@ public class WeatherRepository {
         if(mInitialized) return;
         mInitialized = true;
 
+        mWeatherNetworkDataSource.scheduleRecurringFetchWeatherSync();
+
         mExecutors.diskIO.execute(() -> {
             if(isFetchNeeded()) {
                 Log.d("WeatherRepository", "starting the service to fetch the data");

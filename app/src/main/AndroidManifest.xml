@@ -21,6 +21,12 @@
         </activity>
         <activity android:name=".ui.detail.DetailActivity"></activity>
         <service android:name=".data.network.CloudsSyncIntentService"/>
+        <service android:name=".data.network.CloudsFirebaseJobService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE"/>
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>
